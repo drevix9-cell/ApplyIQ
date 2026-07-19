@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApplyIQ — Intelligence Platform</title>
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ================= 1. AUTHENTICATION GATEWAY ================= -->
+    <div id="auth-container" class="auth-card">
+        <div id="auth-welcome-state" class="auth-state">
+            <div class="app-mini-brand">
+                <span class="mini-logo-box">A</span> ApplyIQ
+            </div>
+            <h1 class="welcome-heading">Welcome to ApplyIQ</h1>
+            <p class="welcome-subtitle">Create professional documents, analyze assignments, write clean source code, and generate creative copy instantly using multimodal AI.</p>
+            <div class="welcome-action-group">
+                <button class="action-btn solid-white" onclick="showAuthForm('login')">Login</button>
+                <button class="action-btn outline-white" onclick="showAuthForm('signup')">Create Account</button>
+            </div>
+        </div>
+
+        <div id="auth-form-state" class="auth-state hidden">
+            <button class="back-to-welcome-btn" onclick="hideAuthForm()">← Back</button>
+            <h2 id="form-title" class="form-heading">Sign In</h2>
+            <form id="auth-form" onsubmit="handleAuth(event)">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="auth-email" required placeholder="name@domain.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="auth-password" required placeholder="••••••••" minlength="6">
+                </div>
+                <div id="confirm-password-group" class="input-group hidden">
+                    <label>Confirm Password</label>
+                    <input type="password" id="auth-confirm-password" placeholder="••••••••">
+                </div>
+                <button type="submit" id="auth-submit-btn" class="action-btn solid-white">Continue →</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= 2. ANIMATED LOGO SPLASH SCREEN ================= -->
+    <div id="splash-container" class="splash-container hidden">
+        <div class="splash-content">
+            <h1 class="logo-text large animate-pulse">Apply<span>IQ</span></h1>
+            <div class="loading-bar-container">
+                <div class="loading-bar-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 3. PREMIUM DARK SAAS DASHBOARD ================= -->
+    <div id="app-container" class="app-container dashboard-layout hidden">
+        
+        <!-- Mobile Native Top Bar header -->
+        <header class="mobile-header">
+            <span class="logo-text small" onclick="showDashboard()">Apply<span>IQ</span></span>
+            <div class="mobile-header-actions">
+                <button class="icon-btn" onclick="openSettings()">⚙️ Settings</button>
+                <button class="icon-btn logout" onclick="handleLogout()">🚪</button>
+            </div>
+        </header>
+
+        <!-- Left Sidebar Panel -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-brand" onclick="showDashboard()">
+                    <h1 class="logo-text small">Apply<span>IQ</span></h1>
+                    <span class="version-tag">PRO</span>
+                </div>
+                <button class="new-chat-btn" onclick="showDashboard()">＋ New Session</button>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-label">Workspaces</div>
+                <button class="menu-item" onclick="openTool('job')">💼 Career Core</button>
+                <button class="menu-item" onclick="openTool('homework')">🎓 Academic Core</button>
+                <button class="menu-item" onclick="openTool('code')">💻 Developer Sandbox</button>
+                <button class="menu-item" onclick="openTool('creative')">🎨 Creative Studio</button>
+                
+                <div class="menu-label security-label">Configuration</div>
+                <button class="menu-item settings-trigger-btn" onclick="openSettings()">⚙️ Access Keys</button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                    <div class="user-info">
+                        <span id="user-display-email" class="user-name">Guest User</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Right Working Stage Panel Interface -->
+        <main class="main-stage">
+            
+            <!-- CORE DASHBOARD HOME -->
+            <div id="dashboard-view" class="dashboard-home">
+                <div class="welcome-hero">
+                    <h2>How can ApplyIQ assist you today?</h2>
+                    <p>Select an environment parameter workspace block below to launch live multimodal AI production pipelines.</p>
+                </div>
+
+                <div class="feature-showcase-grid">
+                    <div class="showcase-card" onclick="openTool('job')">
+                        <div class="card-meta">MODULE 01</div>
+                        <h3>Career Optimization</h3>
+                        <p>Inject resumes alongside targets to auto-compile tailored cover letters instantly.</p>
+                        <div class="card-footer-link">Initialize Pipeline ↗</div>
+                    </div>
+
+                    <div class="showcase-card" onclick="openTool('homework')">
+                        <div class="card-meta">MODULE 02</div>
+                        <h3>Academic Engineering</h3>
+                        <p>Submit text or snap photos of scholastic problems to systematically deconstruct logic variables step-by-step.</p>
+                        <div class="card-footer-link">Initialize Pipeline ↗</div>
+                    </div>
+
+                    <div class="showcase-card" onclick="openTool('code')">
+                        <div class="card-meta">MODULE 03</div>
+                        <h3>Developer Sandbox</h3>
+                        <p>Debug faulty applications, write clean code architectures, or snap images of layouts to generate frontend files.</p>
+                        <div class="card-footer-link">Initialize Pipeline ↗</div>
+                    </div>
+
+                    <div class="showcase-card" onclick="openTool('creative')">
+                        <div class="card-meta">MODULE 04</div>
+                        <h3>Creative Studio</h3>
+                        <p>Draft high-converting ad copy, outline video content frameworks, or rewrite assets into premium branding.</p>
+                        <div class="card-footer-link">Initialize Pipeline ↗</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WORKSPACE TARGET VIEW PANEL -->
+            <div id="tool-view" class="focused-tool hidden">
+                <button class="panel-back-btn" onclick="showDashboard()">← Dashboard</button>
+                <div id="active-tool-workspace"></div>
+
+                <!-- DYNAMIC CONSOLE STREAM RESULT LOGS -->
+                <div id="result-container" class="result-container hidden">
+                    <div class="result-bar-header">
+                        <span class="status-indicator live">● AI STREAM CORE</span>
+                        <button class="copy-btn" onclick="copyOutput()">Copy Text</button>
+                    </div>
+                    <div id="output-text"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ================= 4. MOBILE FRIENDLY GLOBAL SETTINGS MODAL ================= -->
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>System Variables</h3>
+                <button class="close-modal-x" onclick="closeSettings()">×</button>
+            </div>
+            <p>Paste your API variable below to activate your live application build logic. This variable is stored securely inside your device local memory.</p>
+            
+            <div class="input-group">
+                <label>Google Gemini API Key</label>
+                <input type="password" id="modal-api-key-input" placeholder="AIzaSy...">
+            </div>
+
+            <div class="modal-actions">
+                <button class="action-btn solid-white" onclick="saveSettings()">Save Matrix Keys</button>
+                <button class="action-btn outline-white" onclick="closeSettings()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
